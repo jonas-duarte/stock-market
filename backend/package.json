@@ -1,0 +1,24 @@
+{
+  "name": "stock-market-ws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonas Rafael Duarte dos Santos",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "iconv": "^2.3.4",
+    "iconv-lite": "^0.4.24"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
