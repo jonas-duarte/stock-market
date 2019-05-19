@@ -1,6 +1,7 @@
 export const portifolio = [
   "BKBR3",
   "GOAU3",
+  "GOAU4",
   "VIVT3",
   "VIVT4",
   "ITSA3",
