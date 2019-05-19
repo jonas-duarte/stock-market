@@ -92,7 +92,7 @@ class Fundamentus {
       `http://www.fundamentus.com.br/detalhes.php?papel=${papel}`
     ).then(response => {
       return this.htmlToJsonDetalhes(
-        iconv.decode(response.data, "ISO-8859-1").toString()
+        iconv.decode(new Buffer(response.data, "latin1"), "WINDOWS-1252").toString()
       );
     });
   }

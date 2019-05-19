@@ -6,13 +6,12 @@ class AlphaVantage {
   static key = alphaVantageKey;
 
   static getCurrentQuote = symbol => {
-    const query = ["function=GLOBAL_QUOTE", `symbol=${symbol}`];
+    const query = ["function=GLOBAL_QUOTE", `symbol=${symbol}.SAO`];
     return Http.get(this.urlBuilder(query));
   };
 
   static urlBuilder = query => {
     console.log(`${this.url}query?${query.join("&")}&apikey=${this.key}`);
-    return "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo";
     return `${this.url}query?${query.join("&")}&apikey=${this.key}`;
   };
 }
