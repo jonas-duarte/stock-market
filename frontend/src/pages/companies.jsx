@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { portifolio } from "../assets/config";
 import Fundamentus from "../utils/apis/fundamentus";
-import TableView from "../components/tableView/";
+import Table from "../components/table/";
 
 class Companies extends Component {
   state = {
@@ -30,7 +30,7 @@ class Companies extends Component {
 
   render() {
     const { companies } = this.state;
-    return <TableView columns={columns} items={companies} />;
+    return <Table columns={columns} items={companies} />;
   }
 }
 

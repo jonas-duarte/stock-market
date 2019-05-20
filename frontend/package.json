@@ -7,6 +7,7 @@
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.3",
+    "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
