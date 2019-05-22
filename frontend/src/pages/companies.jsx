@@ -9,12 +9,6 @@ class Companies extends Component {
   };
 
   async componentDidMount() {
-    // let alpha = [];
-    // for (let i = 0; i < portifolio.length; i++) {
-    //   const response = await AlphaVantage.getCurrentQuote(portifolio[i]);
-    //   alpha.push(response.data);
-    // }
-
     let companies = [];
     for (let i = 0; i < portifolio.length; i++) {
       const response = await await Fundamentus.getFundamentalistData(
@@ -37,15 +31,15 @@ class Companies extends Component {
 export default Companies;
 
 const columns = [
-  { path: "papel", label: "papel" },
+  { path: "papel", label: "papel", filter: true },
   { path: "cotacao", label: "cotacao" },
-  { path: "tipo", label: "tipo" },
+  { path: "tipo", label: "tipo", filter: true },
   { path: "dataUltCot", label: "dataUltCot" },
   { path: "empresa", label: "empresa" },
   { path: "min52Sem", label: "min52Sem" },
-  { path: "setor", label: "setor" },
+  { path: "setor", label: "setor", filter: true  },
   { path: "max52Sem", label: "max52Sem" },
-  { path: "subsetor", label: "subsetor" },
+  { path: "subsetor", label: "subsetor", filter: true },
   { path: "volMedio2m", label: "volMedio2m" },
   { path: "valorDeMercado", label: "valorDeMercado" },
   { path: "ultBalancoProcessado", label: "ultBalancoProcessado" },
