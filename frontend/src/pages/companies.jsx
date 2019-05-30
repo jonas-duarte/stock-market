@@ -8,18 +8,13 @@ class Companies extends Component {
     companies: []
   };
 
-  async componentDidMount() {
-    let companies = [];
-    for (let i = 0; i < portifolio.length; i++) {
-      const response = await await Fundamentus.getFundamentalistData(
-        portifolio[i]
-      );
-      let company = response.data;
-      company.id = i;
-      companies.push(response.data);
-    }
-
-    this.setState({ companies });
+  componentDidMount() {
+    portifolio.forEach(p => {
+      Fundamentus.getFundamentalistData(p).then(res => {
+        this.state.companies.push(res.data);
+        this.setState({ companies: this.state.companies });
+      });
+    });
   }
 
   render() {
@@ -37,7 +32,7 @@ const columns = [
   { path: "dataUltCot", label: "dataUltCot" },
   { path: "empresa", label: "empresa" },
   { path: "min52Sem", label: "min52Sem" },
-  { path: "setor", label: "setor", filter: true  },
+  { path: "setor", label: "setor", filter: true },
   { path: "max52Sem", label: "max52Sem" },
   { path: "subsetor", label: "subsetor", filter: true },
   { path: "volMedio2m", label: "volMedio2m" },

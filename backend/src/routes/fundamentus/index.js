@@ -5,10 +5,12 @@ var iconv = require("iconv-lite");
 const Http = require("../../utils/http");
 const cheerio = require("cheerio");
 
+const Db = require("../../db");
+
 class Fundamentus {
   constructor() {}
 
-  htmlToJsonDetalhes(html) {
+  htmlToJsonDetalhes(html, papel) {
     const $ = cheerio.load(html);
     const td = $("td");
     var list = [];
@@ -24,7 +26,8 @@ class Fundamentus {
       )
     );
     return {
-      papel: list[1].toUpperCase(),
+      papel: papel.toUpperCase(),
+      sync: list[1].toUpperCase() === papel.toUpperCase() ? "ok" : "com falha",
       cotacao: parseFloat(list[3]),
       tipo: list[5],
       dataUltCot: list[7],
@@ -96,42 +99,29 @@ class Fundamentus {
     };
   }
 
-  getDetalhes(papel, resWS) {
-    var logindb = require("../../assets/keys").mongodb;
-
-    const MongoClient = require("mongodb").MongoClient;
-    const uri = "mongodb+srv://<user>:<password>@stockmarketcluster-ecbdt.mongodb.net/test?retryWrites=true&w=majority"
-      .replace("<user>", logindb.user)
-      .replace("<password>", logindb.password);
-    const client = new MongoClient(uri, { useNewUrlParser: true });
-    client.connect(err => {
-      const collection = client.db("stock-market").collection("fundamentus");
-
-      collection
-        .findOne({ papel: papel.toUpperCase() })
-        .then(res => {
-          if (res) return resWS.send(JSON.stringify(res));
-          Http.get(
-            `http://www.fundamentus.com.br/detalhes.php?papel=${papel}`
-          ).then(response => {
-            const data = this.htmlToJsonDetalhes(
-              iconv
-                .decode(
-                  new Buffer.from(response.data, "latin1"),
-                  "WINDOWS-1252"
-                )
-                .toString()
-            );
-            // console.log(data);
-            collection.insertOne(data);
-            resWS.send(JSON.stringify(data));
-          });
-        })
-        // .finally(() => {
-        //   client.close();
-        // });
+  getDetalhes(papel) {
+    return Http.get(
+      `http://www.fundamentus.com.br/detalhes.php?papel=${papel}`
+    ).then(response => {
+      return this.htmlToJsonDetalhes(
+        iconv
+          .decode(new Buffer.from(response.data, "latin1"), "WINDOWS-1252")
+          .toString(),
+        papel
+      );
     });
-    return;
+  }
+
+  getFundamentusData(papel) {
+    const collection = Db.getCollection("fundamentus");
+
+    return collection.findOne({ papel: papel.toUpperCase() }).then(res => {
+      if (res) return res;
+      return this.getDetalhes(papel).then(res => {
+        collection.insertOne(res);
+        return res;
+      });
+    });
   }
 }
 

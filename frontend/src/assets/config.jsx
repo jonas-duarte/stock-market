@@ -5,11 +5,17 @@ export const portifolio = [
   "vivt3",
   "vivt4",
   "itsa3",
-  "itsA4",
+  "itsa4",
   "oibr3",
   "oibr4",
   "trpl3",
-  "trpl4"
+  "trpl4",
+  "egie3",
+  "mglu3",
+  "bidi4",
+  "sanb4",
+  "sanb3",
+  "enev3"
 ];
 
 /* Discoment this line to coment everything bellow :)
