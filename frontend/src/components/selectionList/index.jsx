@@ -48,7 +48,7 @@ class SelectionList extends Component {
   render() {
     const { classes, items, selectedItems, onChange, label } = this.props;
     return (
-      <div className={classes.root}>
+      <React.Fragment>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-multiple-checkbox">{label}</InputLabel>
           <Select
@@ -67,7 +67,7 @@ class SelectionList extends Component {
             ))}
           </Select>
         </FormControl>
-      </div>
+      </React.Fragment>
     );
   }
 }

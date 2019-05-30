@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "iconv": "^2.3.4",
-    "iconv-lite": "^0.4.24"
+    "iconv-lite": "^0.4.24",
+    "mongodb": "^3.2.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
