@@ -1,25 +1,49 @@
-export const portifolio = [
-  "bkbr3",
-  "goau3",
-  "goau4",
-  "vivt3",
-  "vivt4",
-  "itsa3",
-  "itsa4",
-  "oibr3",
-  "oibr4",
-  "trpl3",
-  "trpl4",
-  "egie3",
-  "mglu3",
-  "bidi4",
-  "sanb4",
-  "sanb3",
-  "enev3"
+export const papeis = [
+  "BKBR3",
+  "GOAU3",
+  "GOAU4",
+  "VIVT3",
+  "VIVT4",
+  "ITSA3",
+  "ITSA4",
+  "OIBR3",
+  "OIBR4",
+  "TRPL3",
+  "TRPL4",
+  "EGIE3",
+  "MGLU3",
+  "BIDI4",
+  "SANB4",
+  "SANB3",
+  "ENEV3"
+];
+
+export const operacoes = [
+  {
+    operacao: "Compra",
+    papel: "GOAU4",
+    quantidade: 200,
+    valor: 7.55,
+    data: "08/04/2019"
+  },
+  {
+    operacao: "Compra",
+    papel: "GOAU4",
+    quantidade: 52,
+    valor: 7.39,
+    data: "09/04/2019"
+  },
+  {
+    operacao: "Compra",
+    papel: "ITSA4",
+    quantidade: 50,
+    valor: 11.35,
+    data: "13/05/2019"
+  }
 ];
 
 /* Discoment this line to coment everything bellow :)
-export const portifolio = [
+export const papeis = [
   "AALR3",
   "ABCB3",
   "ABCB4",

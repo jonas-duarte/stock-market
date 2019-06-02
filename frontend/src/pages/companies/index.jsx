@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { portifolio } from "../assets/config";
-import Fundamentus from "../utils/apis/fundamentus";
-import Table from "../components/table/";
+import { papeis } from "../../assets/config";
+import Fundamentus from "../../utils/apis/fundamentus";
+import Table from "../../components/table";
 
 class Companies extends Component {
   state = {
@@ -9,7 +9,7 @@ class Companies extends Component {
   };
 
   componentDidMount() {
-    portifolio.forEach(p => {
+    papeis.forEach(p => {
       Fundamentus.getFundamentalistData(p).then(res => {
         this.state.companies.push(res.data);
         this.setState({ companies: this.state.companies });
