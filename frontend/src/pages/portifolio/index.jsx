@@ -20,8 +20,19 @@ class Portifolio extends Component {
           quantidade: 0
         });
       }
-      portifolio[i].valorTotalInvestido += o.valor * o.quantidade;
-      portifolio[i].quantidade += o.quantidade;
+      switch (o.operacao) {
+        case "Compra":
+          portifolio[i].valorTotalInvestido += o.valor * o.quantidade;
+          portifolio[i].quantidade += o.quantidade;
+          break;
+        case "Venda":
+          portifolio[i].valorTotalInvestido -= o.valor * o.quantidade;
+          portifolio[i].quantidade -= o.quantidade;
+          break;
+        case "Dividendo":
+          portifolio[i].valorTotalInvestido -= o.valor * o.quantidade;
+          break;
+      }
     });
     portifolio.forEach(p => {
       AlphaVantage.getCurrentQuote(p.papel).then(res => {

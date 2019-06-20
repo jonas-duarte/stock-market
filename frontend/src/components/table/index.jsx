@@ -8,19 +8,12 @@ import TableBody from "./tableBody";
 import _ from "lodash";
 import SelectionList from "../selectionList";
 
+import { paginate } from "../../utils/list/paginate";
+import { filterEachFromPath } from "../../utils/list/filters";
+
 const getValuesFromPath = (items, path) => {
   const filterArray = items.map(item => item[path]);
   return Array.from(new Set(filterArray));
-};
-
-const filterMultiples = (items, path, filters) => {
-  let filteredItems = [];
-  items.forEach(item => {
-    if (filters.includes(item[path])) {
-      filteredItems.push(item);
-    }
-  });
-  return filteredItems;
 };
 
 class Table extends Component {
@@ -43,26 +36,19 @@ class Table extends Component {
   };
 
   render() {
-    const { columns, items } = this.props;
+    const { columns, items, pageSize } = this.props;
     const { sort, selectedFilters } = this.state;
 
     const filters = columns.filter(column => column.filter);
 
-    let filteredItems = items;
-    filters.forEach(f => {
-      if (selectedFilters[f.path] && selectedFilters[f.path].length > 0) {
-        filteredItems = filterMultiples(
-          filteredItems,
-          f.path,
-          selectedFilters[f.path]
-        );
-      }
-    });
+    let filteredItems = filterEachFromPath(items, filters, selectedFilters);
 
     const orderedItems =
       sort.path === ""
         ? filteredItems
         : _.orderBy(filteredItems, [sort.path], [sort.order]);
+
+    const paginatedItems = paginate(orderedItems, 1, pageSize);
 
     return (
       <React.Fragment>
@@ -77,11 +63,19 @@ class Table extends Component {
         ))}
         <TableMaterial>
           <TableHeader columns={columns} sort={sort} onSort={this.handleSort} />
-          <TableBody columns={columns} items={orderedItems} />
+          <TableBody
+            columns={columns}
+            items={paginatedItems}
+            pageSize={pageSize}
+          />
         </TableMaterial>
       </React.Fragment>
     );
   }
 }
+
+Table.defaultProps = {
+  pageSize: 1000
+};
 
 export default Table;
