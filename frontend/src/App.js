@@ -6,6 +6,7 @@ import Home from "./pages/home/";
 import Companies from "./pages/companies/";
 import Portifolio from "./pages/portifolio/";
 import Operacoes from "./pages/operacoes/";
+import { password } from "./assets/keys";
 
 const routes = [
   { route: "/", label: "Home", component: Home },
@@ -15,6 +16,11 @@ const routes = [
 ];
 
 function App() {
+  if (localStorage.getItem("stock-market-password") !== password) {
+    return (
+      <div>Coloque o password no local storage -> stock-market-password</div>
+    );
+  }
   return (
     <BrowserRouter>
       <div>

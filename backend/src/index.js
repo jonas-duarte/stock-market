@@ -11,21 +11,31 @@ var cors = require("cors");
 var fundamentus = new Fundamentus();
 var alphaVantage = new AlphaVantage();
 
+var password = require("./assets/keys").password;
+
 Db.connect(() => {
   app.use(cors());
 
   app.get("/fundamentus/:papel/", function(req, res) {
-    fundamentus
-      .getFundamentusData(req.params.papel)
-      .then(data => res.send(JSON.stringify(data)))
-      .catch(err => res.send(err));
+    if (req.headers.password === password) {
+      fundamentus
+        .getFundamentusData(req.params.papel)
+        .then(data => res.send(JSON.stringify(data)))
+        .catch(err => res.send(err));
+    } else {
+      res.send("Invalid password!!!");
+    }
   });
 
   app.get("/alphaVantage/:papel/", function(req, res) {
-    alphaVantage
-      .getCurrentQuote(req.params.papel)
-      .then(data => res.send(JSON.stringify(data)))
-      .catch(err => res.send(err));
+    if (req.headers.password === password) {
+      alphaVantage
+        .getCurrentQuote(req.params.papel)
+        .then(data => res.send(JSON.stringify(data)))
+        .catch(err => res.send(err));
+    } else {
+      res.send("Invalid password!!!");
+    }
   });
 
   app.listen(8080, function() {
