@@ -27,6 +27,7 @@ class Fundamentus {
     );
     return {
       papel: papel.toUpperCase(),
+      updateDate: formatDate(new Date()),
       sync: list[1].toUpperCase() === papel.toUpperCase() ? "ok" : "com falha",
       cotacao: parseFloat(list[3]),
       tipo: list[5],
@@ -115,13 +116,18 @@ class Fundamentus {
   getFundamentusData(papel) {
     const collection = Db.getCollection("fundamentus");
 
-    return collection.findOne({ papel: papel.toUpperCase() }).then(res => {
-      if (res) return res;
-      return this.getDetalhes(papel).then(res => {
-        collection.insertOne(res);
-        return res;
+    return collection
+      .findOne({
+        papel: papel.toUpperCase(),
+        updateDate: formatDate(new Date())
+      })
+      .then(res => {
+        if (res) return res;
+        return this.getDetalhes(papel).then(res => {
+          collection.insertOne(res);
+          return res;
+        });
       });
-    });
   }
 }
 

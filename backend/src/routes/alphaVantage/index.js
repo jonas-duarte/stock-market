@@ -6,17 +6,23 @@ const url = "https://www.alphavantage.co/";
 
 const Db = require("../../db");
 
+const formatDate = require("../../utils/date").formatDate;
+
 class AlphaVantage {
   getCurrentQuote(papel) {
     const collection = Db.getCollection("alphaVantage-globalQuote");
-
-    return collection.findOne({ papel: papel.toUpperCase() }).then(res => {
-      if (res) return res;
-      return this.getGlobalQuote(papel).then(res => {
-        collection.insertOne(res);
-        return res;
+    return collection
+      .findOne({
+        papel: papel.toUpperCase(),
+        updateDate: formatDate(new Date())
+      })
+      .then(res => {
+        if (res) return res;
+        return this.getGlobalQuote(papel).then(res => {
+          collection.insertOne(res);
+          return res;
+        });
       });
-    });
   }
 
   getGlobalQuote(papel) {
@@ -25,6 +31,7 @@ class AlphaVantage {
       const d = res.data;
       return {
         papel: papel.toUpperCase(),
+        updateDate: formatDate(new Date()),
         symbol: d["Global Quote"]["01. symbol"],
         open: parseFloat(d["Global Quote"]["02. open"]),
         high: parseFloat(d["Global Quote"]["03. high"]),

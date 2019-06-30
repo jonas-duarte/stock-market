@@ -40,5 +40,12 @@ export const operacoes = [
     quantidade: 50,
     valor: 1.0 / 50,
     data: "01/07/2019"
+  },
+  {
+    operacao: "Venda",
+    papel: "ITSA4",
+    quantidade: 50,
+    valor: 12.67,
+    data: "27/06/2019"
   }
 ];

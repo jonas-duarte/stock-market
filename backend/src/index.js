@@ -13,6 +13,8 @@ var alphaVantage = new AlphaVantage();
 
 var password = require("./assets/keys").password;
 
+const port = process.env.PORT || 8080;
+
 Db.connect(() => {
   app.use(cors());
 
@@ -38,7 +40,7 @@ Db.connect(() => {
     }
   });
 
-  app.listen(8080, function() {
-    console.log("Listenning port 8080");
+  app.listen(port, function() {
+    console.log("Listenning port " + port);
   });
 });
