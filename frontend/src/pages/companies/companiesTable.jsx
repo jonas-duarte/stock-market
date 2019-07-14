@@ -16,7 +16,7 @@ class CompaniesTable extends Component {
     papeis.forEach(p => {
       Fundamentus.getFundamentalistData(p.papel).then(res => {
         const c = res.data;
-        if (!companyIsValid(c)) return;
+        // if (!companyIsValid(c)) return;
         c.score = companyScore(c);
         this.state.companies.push(c);
         this.setState({ companies: this.state.companies });
@@ -35,6 +35,7 @@ class CompaniesTable extends Component {
   render() {
     const { papeis } = this.props;
     const { companies } = this.state;
+
     return (
       <React.Fragment>
         <div>

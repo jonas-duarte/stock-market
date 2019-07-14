@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { operacoes } from "../../assets/config";
 import Table from "../../components/table";
 import AlphaVantage from "../../utils/apis/alphaVantage";
+import J from "../../utils/apis/J";
 
 class Portifolio extends Component {
   state = {
     portifolio: []
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     let portifolio = [];
+    const operacoes = await J.getOperations();
     operacoes.forEach(o => {
       let i = portifolio.findIndex(p => p.papel === o.papel);
       if (i === -1) {

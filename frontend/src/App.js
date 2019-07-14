@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -6,7 +6,9 @@ import Home from "./pages/home/";
 import Companies from "./pages/companies/";
 import Portifolio from "./pages/portifolio/";
 import Operacoes from "./pages/operacoes/";
-import { password } from "./assets/keys";
+// import { password } from "./assets/keys";
+import Login from "./pages/login";
+import axios from "axios";
 
 const routes = [
   { route: "/", label: "Home", component: Home },
@@ -15,26 +17,34 @@ const routes = [
   { route: "/operacoes", label: "Operações", component: Operacoes }
 ];
 
-function App() {
-  if (localStorage.getItem("stock-market-password") !== password) {
+class App extends Component {
+  state = {
+    token: localStorage.getItem("stock-market-token")
+  };
+
+  handleUpdate = () => {
+    this.setState({ token: localStorage.getItem("stock-market-token") });
+  };
+
+  render() {
+    if (!this.state.token) {
+      return <Login update={this.handleUpdate} />;
+    }
     return (
-      <div>Coloque o password no local storage -> stock-market-password</div>
+      <BrowserRouter>
+        <div>
+          {routes.map(r => (
+            <Link style={{ paddingLeft: "1em" }} to={r.route}>
+              {r.label}
+            </Link>
+          ))}
+        </div>
+        {routes.map(r => (
+          <Route exact path={r.route} component={r.component} />
+        ))}
+      </BrowserRouter>
     );
   }
-  return (
-    <BrowserRouter>
-      <div>
-        {routes.map(r => (
-          <Link style={{ paddingLeft: "1em" }} to={r.route}>
-            {r.label}
-          </Link>
-        ))}
-      </div>
-      {routes.map(r => (
-        <Route exact path={r.route} component={r.component} />
-      ))}
-    </BrowserRouter>
-  );
 }
 
 export default App;

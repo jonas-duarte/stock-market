@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { operacoes as minhasOperacoes } from "../../assets/config";
+// import { operacoes as minhasOperacoes } from "../../assets/config";
 import Table from "../../components/table";
+import J from "../../utils/apis/J";
 
 class Operacoes extends Component {
   state = {
     operacoes: []
   };
 
-  componentDidMount() {
-    this.setState({ operacoes: minhasOperacoes });
+  async componentDidMount() {
+    const operacoes = await J.getOperations();
+    this.setState({ operacoes });
   }
 
   render() {

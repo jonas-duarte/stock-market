@@ -1,4 +1,4 @@
-const key = require("../../assets/keys").alphaVantage.key;
+const Properties = require("../properties");
 
 const Http = require("../../utils/http");
 
@@ -47,7 +47,7 @@ class AlphaVantage {
   }
 
   urlBuilder(query) {
-    return `${url}query?${query.join("&")}&apikey=${key}`;
+    return `${url}query?${query.join("&")}&apikey=${Properties.get("alpha-vantage.key")}`;
   }
 }
 

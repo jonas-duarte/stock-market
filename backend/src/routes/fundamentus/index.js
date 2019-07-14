@@ -5,6 +5,8 @@ var iconv = require("iconv-lite");
 const Http = require("../../utils/http");
 const cheerio = require("cheerio");
 
+const formatDate = require("../../utils/date").formatDate;
+
 const Db = require("../../db");
 
 class Fundamentus {

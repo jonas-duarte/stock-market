@@ -1,10 +1,10 @@
 import Http from "../http";
 
 class AlphaVantage {
-  static url = "https://stock-market-brazil-backend.herokuapp.com/alphavantage/";
+  static route = "/alphavantage/";
 
   static getCurrentQuote = symbol => {
-    return Http.get(`${this.url}${symbol}`);
+    return Http.get(`${this.route}${symbol}`);
   };
 }
 
