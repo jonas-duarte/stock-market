@@ -6,9 +6,7 @@ import Home from "./pages/home/";
 import Companies from "./pages/companies/";
 import Portifolio from "./pages/portifolio/";
 import Operacoes from "./pages/operacoes/";
-// import { password } from "./assets/keys";
 import Login from "./pages/login";
-import axios from "axios";
 
 const routes = [
   { route: "/", label: "Home", component: Home },
