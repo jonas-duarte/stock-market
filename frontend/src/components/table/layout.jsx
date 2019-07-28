@@ -32,7 +32,7 @@ class Layout extends Component {
 
   handleInsert = item => {
     const { layout } = this.state;
-    const index = layout.findIndex(i => i === item);
+    const index = layout.findIndex(i => i.path === item.path);
     if (index !== -1) return;
     layout.push(item);
     this.setState({ layout });
@@ -40,14 +40,14 @@ class Layout extends Component {
 
   handleRemove = item => {
     const { layout } = this.state;
-    const index = layout.findIndex(i => i === item);
+    const index = layout.findIndex(i => i.path === item.path);
     layout.splice(index, 1);
     this.setState({ layout });
   };
 
   handleUpPosition = item => {
     const { layout } = this.state;
-    const index = layout.findIndex(i => i === item);
+    const index = layout.findIndex(i => i.path === item.path);
     if (index - 1 < 0) return;
     const aux = layout[index];
     layout[index] = layout[index - 1];
@@ -57,7 +57,7 @@ class Layout extends Component {
 
   handleDownPosition = item => {
     const { layout } = this.state;
-    const index = layout.findIndex(i => i === item);
+    const index = layout.findIndex(i => i.path === item.path);
     if (index + 1 >= layout.length) return;
     const aux = layout[index];
     layout[index] = layout[index + 1];
