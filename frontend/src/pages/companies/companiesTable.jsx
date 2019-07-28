@@ -41,7 +41,7 @@ class CompaniesTable extends Component {
         <div>
           Empresas listadas/total: {companies.length}/{papeis.length}
         </div>
-        <Table columns={columns} items={companies} />
+        <Table id="companies" columns={columns} items={companies} />
       </React.Fragment>
     );
   }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const url = "https://stock-market-brazil-backend.herokuapp.com";
-// const url = "http://localhost:8080";
+// const url = "https://stock-market-brazil-backend.herokuapp.com";
+const url = "http://localhost:8080";
 
 const handleError = error => {
   if (error.response.status === 401) {

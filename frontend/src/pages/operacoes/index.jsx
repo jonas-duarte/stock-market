@@ -15,7 +15,7 @@ class Operacoes extends Component {
 
   render() {
     const { operacoes } = this.state;
-    return <Table columns={columns} items={operacoes} />;
+    return <Table id="operacoes" columns={columns} items={operacoes} />;
   }
 }
 

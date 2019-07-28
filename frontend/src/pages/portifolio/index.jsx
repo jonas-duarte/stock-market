@@ -50,7 +50,7 @@ class Portifolio extends Component {
 
   render() {
     const { portifolio } = this.state;
-    return <Table columns={columns} items={portifolio} />;
+    return <Table id="portifolio" columns={columns} items={portifolio} />;
   }
 }
 

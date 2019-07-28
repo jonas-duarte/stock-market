@@ -20,7 +20,12 @@ const TableBody = props => {
       {items.map(item => (
         <TableRow key={item.id}>
           {columns.map(column => {
-            const object = findObject(item, column.path);
+            let object;
+            if (column.path) {
+              object = findObject(item, column.path);
+            } else {
+              object = column.object;
+            }
             return (
               <TableCell
                 key={item.id + (column.path || column.key)}
