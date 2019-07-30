@@ -37,7 +37,7 @@ class Table extends Component {
 
   loadProperties() {
     const { id, columns } = this.props;
-    this.setState({ layout: JSON.parse(localStorage.getItem(`layout-${id}`)) || columns });
+    this.setState({ layout: JSON.parse(localStorage.getItem(`layout-${id}`)) || [...columns] });
   }
 
   componentDidMount() {
