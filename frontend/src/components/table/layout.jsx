@@ -19,7 +19,7 @@ class Layout extends Component {
   componentDidMount() {
     const { id, columns } = this.props;
     this.setState({
-      layout: JSON.parse(localStorage.getItem(`layout-${id}`)) || columns
+      layout: JSON.parse(localStorage.getItem(`layout-${id}`)) || [...columns]
     });
   }
 
