@@ -17,9 +17,7 @@ class Home extends Component {
           <h1>Next steps:</h1>
           <h2>* Advanced filters</h2>
           <h2>* Customizable fields in grid</h2>
-          <h2>* Insert operation</h2>
-          <h2>* Change operation</h2>
-          <h2>* Remove operation</h2>
+          <h2>* Crud operations</h2>
           <h2>* Save grid layout in data the base</h2>
           <h2>* Operations simulator with unlimited money</h2>
           <h2>* Operations simulator with limited money (like a game)</h2>
